@@ -518,6 +518,7 @@ function gx(){[gT,gS,gP].forEach(function(g){var a=!!g.querySelector("button.on"
 var _bd=badge;badge=function(){_bd();gx();};
 
 var SBK="ppc-sb",sbc=null,sbs=null,ready=false,tmr=null,cfg={};try{cfg=JSON.parse(localStorage.getItem(SBK)||"{}");}catch(e){}
+var DU="https://dvxxyhozbszsenqizoef.supabase.co",DK="eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImR2eHh5aG96YnN6c2VucWl6b2VmIiwicm9sZSI6ImFub24iLCJpYXQiOjE3OTQ4NTU4NDksImV4cCI6MjExMDQzMTg0OX0.9GVG9netaA9p8y_DBFKs9t4phpjHXPZZmtLFGAslVmc";if(DU&&DK){cfg.u=DU;cfg.k=DK;cfg.edit=0;}
 function cs(){try{localStorage.setItem(SBK,JSON.stringify(cfg));}catch(e){}}function sm(t){$("sbm").textContent=t;}
 function cu2(){var ok=!!(cfg.u&&cfg.k)&&!cfg.edit,si=!!sbs;$("sbcfg").style.display=ok?"none":"block";$("sbauth").style.display=ok&&!si?"block":"none";$("sbin").style.display=ok&&si?"block":"none";
  if(ok&&si)$("sbw").textContent="Signed in as "+(sbs.user.email||"your account");if(!ok){$("sbu").value=cfg.u||"";$("sbk").value=cfg.k||"";if(!window.supabase)sm("The Supabase library could not load. Check your internet connection.");}}
@@ -542,7 +543,7 @@ $("sbg").onclick=function(){if(!ini())return;if(location.protocol==="file:"){sm(
 $("sbsy").onclick=function(){if(!ready){sm("Not ready to sync yet.");return;}push();};
 $("sbld").onclick=function(){if(!sbs)return;sbc.from("user_data").select("data").eq("id",sbs.user.id).maybeSingle().then(function(x){if(x.error||!x.data){sm(x.error?x.error.message:"No cloud data saved yet.");return;}if(confirm("Replace the data on this device with your cloud copy?"))ap2(x.data.data,sbs.user);});};
 $("sbo").onclick=function(){if(!sbc)return;sbc.auth.signOut().then(function(){cfg.d=null;cs();S.in=0;save();dot();sm("Signed out.");cu2();});};
-ini();cu2();
+$("sbx").style.display=DU?"none":"";ini();cu2();
 
 var als=$("als"),ab2=document.createElement("button");ab2.className="grp";ab2.innerHTML='<span class="gi">⏰</span><span class="gt"><b>Alarm list</b><small></small></span><em class="gc"></em><span class="chv">▾</span>';als.parentNode.insertBefore(ab2,als);als.hidden=true;
 function ac2(){var n=S.al.filter(function(x){return x.on;}).length;ab2.querySelector("small").textContent=als.hidden?"Tap to view or edit":"Tap to hide";ab2.querySelector("em").textContent=n+"/"+S.al.length+" on";}
