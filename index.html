@@ -339,7 +339,7 @@ function tr(){var e=eff(),wk=wkKey(e),di=(e.getDay()+6)%7;
  document.getElementById("trd").textContent=WD[di].toUpperCase()+" SESSION";document.getElementById("trt").textContent=p[1]+" "+p[0];document.getElementById("trx").textContent=p[2];
  var b=document.getElementById("trb");b.textContent=g.done[di]?"✓ Done today. Great work!":"✓ Mark today’s gym done";b.className="trb"+(g.done[di]?" fin":"");
  b.onclick=function(){if(g.done[di])return;g.done[di]=1;save();note("✅ Gym done: "+p[0]);tr();if(g.done.every(Boolean))boom();};
- var sel=document.getElementById("trs");sel.innerHTML="";PL.forEach(function(x,i){var o=document.createElement("option");o.value=i;o.textContent=x[0];sel.appendChild(o);});sel.value=g.plan[di];sel.disabled=!!g.done[di];
+ var sel=document.getElementById("trs");sel.innerHTML="";PL.forEach(function(x,i){var o=document.createElement("option");o.value=i;o.textContent=x[0];sel.appendChild(o);});sel.value=g.plan[di];sel.disabled=false;
  sel.onchange=function(){g.plan[di]=+sel.value;save();tr();};
  var w=document.getElementById("wk");w.innerHTML="";var n=0;
  for(var i=0;i<7;i++){(function(i){var d=document.createElement("button");if(g.done[i])n++;
@@ -579,6 +579,7 @@ window.addEventListener("beforeinstallprompt",function(e){e.preventDefault();dpr
 if((window.matchMedia&&matchMedia("(display-mode: standalone)").matches)||navigator.standalone)ib.style.display="none";
 ib.onclick=function(){if(dpr){dpr.prompt();dpr.userChoice.then(function(){dpr=null;});}else alert("To install: on iPhone, tap Share then Add to Home Screen. On Android or desktop Chrome, open the browser menu and choose Install app. The page must be opened from its https web address, not as a file.");};
 if("serviceWorker" in navigator&&/^https?:$/.test(location.protocol)){navigator.serviceWorker.register("sw.js").then(function(){return navigator.serviceWorker.ready;}).then(function(){if(!S.off){S.off=1;save();note("📶 Offline mode ready: the app now opens without internet.");}}).catch(function(){});}
+$("trs").addEventListener("change",function(){render();});
 VS.push("trade","journal","cal","playbook","risk");
 var _s=show;show=function(v){_s(v);htr();gx();if(v==="login")cu2();if(v==="trade")trD();if(v==="journal"){jl();wb("jw");}if(v==="playbook")pbD();if(v==="cal")cld();if(v==="risk")rk();};
 var _r=render;render=function(){_r();htr();};render();
