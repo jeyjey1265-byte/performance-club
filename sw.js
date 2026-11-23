@@ -1,4 +1,4 @@
-const V="ppc-v1",PRE=["./","index.html","manifest.webmanifest","chart.umd.js","icon-192.png","icon-512.png"];
+const V="ppc-v3",PRE=["./","index.html","manifest.webmanifest","chart.umd.js","icon-192.png","icon-512.png"];
 const CDN=["fonts.googleapis.com","fonts.gstatic.com","cdn.jsdelivr.net","cdnjs.cloudflare.com"];
 self.addEventListener("install",e=>{e.waitUntil(caches.open(V).then(c=>c.addAll(PRE)).then(()=>self.skipWaiting()));});
 self.addEventListener("activate",e=>{e.waitUntil(caches.keys().then(k=>Promise.all(k.filter(x=>x!==V).map(x=>caches.delete(x)))).then(()=>self.clients.claim()));});
